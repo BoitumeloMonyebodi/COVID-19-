@@ -1,0 +1,27 @@
+# Plot cumulative vaccinations over time for selected countries
+plt.figure(figsize=(10, 6))
+for country in countries_of_interest:
+    country_data = df_filtered[df_filtered['location'] == country]
+    plt.plot(country_data['date'], country_data['total_vaccinations'], label=country)
+
+plt.title('Cumulative COVID-19 Vaccinations Over Time')
+plt.xlabel('Date')
+plt.ylabel('Total Vaccinations')
+plt.legend()
+plt.xticks(rotation=45)
+plt.show()
+
+# Compare percentage of vaccinated population
+df_filtered['vaccination_rate'] = df_filtered['total_vaccinations'] / df_filtered['population'] * 100
+
+plt.figure(figsize=(10, 6))
+for country in countries_of_interest:
+    country_data = df_filtered[df_filtered['location'] == country]
+    plt.plot(country_data['date'], country_data['vaccination_rate'], label=country)
+
+plt.title('Vaccination Rate Over Time')
+plt.xlabel('Date')
+plt.ylabel('Vaccination Rate (%)')
+plt.legend()
+plt.xticks(rotation=45)
+plt.show()
