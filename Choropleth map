@@ -1,0 +1,15 @@
+import plotly.express as px
+
+# Prepare the dataframe with 'iso_code' and 'total_cases' for the latest date
+latest_data = df_filtered[df_filtered['date'] == df_filtered['date'].max()]
+choropleth_df = latest_data[['iso_code', 'total_cases']]
+
+# Create a choropleth map
+fig = px.choropleth(choropleth_df, 
+                    locations='iso_code', 
+                    color='total_cases', 
+                    hover_name='iso_code', 
+                    color_continuous_scale="Viridis", 
+                    title="COVID-19 Total Cases by Country")
+
+fig.show()
